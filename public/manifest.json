@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+    "name": "WebStyle",
+    "version": "1.0",
+    "description": "A browser extension which helps u customize ur UI of any platform in diff ways",
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "background/index.ts",
+        "type": "module"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["src/content/index.ts"],
+            "type": "module"
+        }
+    ]
+}
