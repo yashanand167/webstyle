@@ -1,11 +1,7 @@
+import { MainFrame } from "../components/main-frame"
+
 function App() {
-  return (
-    <>
-      <div>
-        <h1>Hello</h1>
-      </div>
-    </>
-  )
+  return <MainFrame />
 }
 
 export default App

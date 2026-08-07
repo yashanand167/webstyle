@@ -34,13 +34,21 @@ Start the dev server:
 bun run dev
 ```
 
+If the extension still shows old UI, reset the dev build output and restart:
+
+```bash
+bun run dev:clean
+```
+
 Load the extension in Chrome:
 
 1. Open `chrome://extensions`
 2. Enable **Developer mode**
 3. Click **Load unpacked** and select the `dist` folder
+4. After code changes, click **Reload** on the extension card
+5. Close the popup completely, then open it again
 
-CRXJS rebuilds the extension on file changes. Reload the extension from `chrome://extensions` when needed.
+Do **not** run `bun run build` while developing — it overwrites `dist/` with a production bundle and Chrome will keep serving stale content until you run `dev:clean` again.
 
 ## Build
 
@@ -55,6 +63,7 @@ Output goes to `dist/`. Load that folder as an unpacked extension, or zip it for
 | Command           | Description              |
 | ----------------- | ------------------------ |
 | `bun run dev`     | Start dev server with HMR |
+| `bun run dev:clean` | Clear `dist/` and start dev (use when UI looks stale) |
 | `bun run build`   | Type-check and build     |
 | `bun run lint`    | Run ESLint               |
 | `bun run preview` | Preview production build |

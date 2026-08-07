@@ -8,6 +8,18 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    crx({manifest})
+    crx({ manifest }),
   ],
+  server: {
+    port: 5173,
+    strictPort: true,
+    hmr: {
+      host: "localhost",
+      port: 5173,
+      clientPort: 5173,
+    },
+    ws: {
+      port: 5173,
+    },
+  },
 });
