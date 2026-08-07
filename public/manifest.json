@@ -5,7 +5,9 @@
     "description": "A browser extension which helps u customize ur UI of any platform in diff ways",
     "permissions": [
         "activeTab",
-        "scripting"
+        "scripting",
+        "storage",
+        "tabs"
     ],
     "action": {
         "default_popup": "popup.html"
@@ -21,6 +23,7 @@
         {
             "matches": ["<all_urls>"],
             "js": ["src/content/index.ts"],
+            "run_at": "document_idle",
             "type": "module"
         }
     ]

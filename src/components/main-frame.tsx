@@ -1,6 +1,73 @@
-import { motion } from 'motion/react'
+import { motion } from "motion/react"
+import { useEffect } from "react"
+import { useThemeStore } from "../store/theme-store"
+import { themeList } from "../themes"
+import type { Theme } from "../themes/types"
+
+function ThemeCard({
+  theme,
+  active,
+  onSelect,
+}: {
+  theme: Theme
+  active: boolean
+  onSelect: () => void
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      className="flex w-full flex-col gap-3 rounded-xl p-4 text-left transition hover:opacity-90"
+      style={{
+        background: theme.colors.background,
+        color: theme.colors.foreground,
+        border: `${theme.borders.width} ${theme.borders.style} ${theme.borders.color}`,
+        borderRadius: theme.borders.radius,
+        boxShadow: active ? `${theme.shadows.default}, 0 0 0 2px ${theme.colors.accent}` : theme.shadows.default,
+        fontFamily: theme.typography.fontFamily,
+        fontWeight: theme.typography.fontWeight,
+      }}
+    >
+      <div className="flex items-center justify-between gap-2">
+        <span className="text-base">{theme.name}</span>
+        {active ? (
+          <span
+            className="rounded-full px-2 py-0.5 text-xs"
+            style={{
+              background: theme.colors.accent,
+              color: theme.colors.background,
+            }}
+          >
+            Active
+          </span>
+        ) : null}
+      </div>
+
+      <div className="flex gap-2">
+        {[theme.colors.accent, theme.colors.secondary, theme.colors.foreground].map(
+          (color) => (
+            <span
+              key={color}
+              className="h-4 w-4 rounded-full"
+              style={{
+                background: color,
+                border: `1px solid ${theme.borders.color}`,
+              }}
+            />
+          ),
+        )}
+      </div>
+    </button>
+  )
+}
 
 export const MainFrame = () => {
+  const { activeTheme, load, select } = useThemeStore()
+
+  useEffect(() => {
+    void load()
+  }, [load])
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -8 }}
@@ -9,12 +76,35 @@ export const MainFrame = () => {
       transition={{ duration: 0.2 }}
       className="flex h-full min-h-[480px] w-full flex-col overflow-hidden rounded-2xl ring-1 ring-[var(--border)]"
     >
-      <div className="flex flex-1 items-center justify-center p-6">
-        <h1 className="m-0 text-center text-2xl font-semibold tracking-tight text-[var(--text-h)]">
-          Hello
-        </h1>
+      <div className="flex flex-col gap-4 p-5">
+        <div>
+          <h1 className="m-0 text-xl font-semibold tracking-tight text-[var(--text-h)]">
+            WebStyle
+          </h1>
+          <p className="mt-1 text-sm text-[var(--text)]">
+            Apply a theme to every site in your browser.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          {themeList.map((theme) => (
+            <ThemeCard
+              key={theme.id}
+              theme={theme}
+              active={activeTheme === theme.id}
+              onSelect={() => void select(theme.id)}
+            />
+          ))}
+
+          <button
+            type="button"
+            onClick={() => void select(null)}
+            className="rounded-xl border border-[var(--border)] px-4 py-3 text-sm text-[var(--text)] transition hover:bg-[var(--code-bg)]"
+          >
+            Reset to site default
+          </button>
+        </div>
       </div>
     </motion.div>
   )
 }
-
