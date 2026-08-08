@@ -6,29 +6,16 @@ export const THEME_STYLE_ID = "webstyle-theme"
 function buildCss(theme: Theme): string {
   return `
     :root {
-      --webstyle-bg: ${theme.colors.background};
-      --webstyle-fg: ${theme.colors.foreground};
-      --webstyle-accent: ${theme.colors.accent};
-      --webstyle-secondary: ${theme.colors.secondary};
       --webstyle-font: ${theme.typography.fontFamily};
       --webstyle-font-weight: ${theme.typography.fontWeight};
       --webstyle-border-width: ${theme.borders.width};
       --webstyle-border-style: ${theme.borders.style};
-      --webstyle-border-color: ${theme.borders.color};
       --webstyle-radius: ${theme.borders.radius};
       --webstyle-shadow: ${theme.shadows.default};
     }
 
-    html {
-      background-color: var(--webstyle-bg) !important;
-      color: var(--webstyle-fg) !important;
-      font-family: var(--webstyle-font) !important;
-      font-weight: var(--webstyle-font-weight) !important;
-    }
-
+    html,
     body {
-      background-color: var(--webstyle-bg) !important;
-      color: var(--webstyle-fg) !important;
       font-family: var(--webstyle-font) !important;
       font-weight: var(--webstyle-font-weight) !important;
     }
@@ -40,7 +27,6 @@ function buildCss(theme: Theme): string {
     aside,
     section,
     article,
-    div,
     p,
     span,
     li,
@@ -54,20 +40,14 @@ function buildCss(theme: Theme): string {
       font-family: var(--webstyle-font) !important;
     }
 
-    a,
-    a:visited {
-      color: var(--webstyle-accent) !important;
-    }
-
     button,
     input,
     textarea,
     select {
       font-family: var(--webstyle-font) !important;
       font-weight: var(--webstyle-font-weight) !important;
-      color: var(--webstyle-fg) !important;
-      background-color: var(--webstyle-bg) !important;
-      border: var(--webstyle-border-width) var(--webstyle-border-style) var(--webstyle-border-color) !important;
+      border-width: var(--webstyle-border-width) !important;
+      border-style: var(--webstyle-border-style) !important;
       border-radius: var(--webstyle-radius) !important;
       box-shadow: var(--webstyle-shadow) !important;
     }
@@ -77,8 +57,17 @@ function buildCss(theme: Theme): string {
     [role="menuitem"],
     [role="dialog"],
     [role="tab"],
-    [role="tabpanel"] {
+    [role="tabpanel"],
+    [role="listbox"],
+    [role="option"] {
       font-family: var(--webstyle-font) !important;
+      border-radius: var(--webstyle-radius) !important;
+    }
+
+    img,
+    video,
+    svg,
+    canvas {
       border-radius: var(--webstyle-radius) !important;
     }
   `.trim()

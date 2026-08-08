@@ -4,7 +4,7 @@ export const comicsTheme: Theme = {
   id: "comics",
   name: "Comics",
 
-  colors: {
+  preview: {
     background: "#FFF8E7",
     foreground: "#111111",
     accent: "#FF3B30",

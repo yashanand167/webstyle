@@ -3,7 +3,8 @@ export type ThemeId = "comics" | "apple"
 export type Theme = {
   id: ThemeId
   name: string
-  colors: {
+  /** Swatches for the popup preview only — never injected onto pages */
+  preview: {
     background: string
     foreground: string
     accent: string

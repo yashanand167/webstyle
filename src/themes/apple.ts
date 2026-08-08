@@ -4,7 +4,7 @@ export const appleTheme: Theme = {
   id: "apple",
   name: "Apple",
 
-  colors: {
+  preview: {
     background: "#F5F5F7",
     foreground: "#1D1D1F",
     accent: "#007AFF",

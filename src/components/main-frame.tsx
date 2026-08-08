@@ -19,11 +19,13 @@ function ThemeCard({
       onClick={onSelect}
       className="flex w-full flex-col gap-3 rounded-xl p-4 text-left transition hover:opacity-90"
       style={{
-        background: theme.colors.background,
-        color: theme.colors.foreground,
+        background: theme.preview.background,
+        color: theme.preview.foreground,
         border: `${theme.borders.width} ${theme.borders.style} ${theme.borders.color}`,
         borderRadius: theme.borders.radius,
-        boxShadow: active ? `${theme.shadows.default}, 0 0 0 2px ${theme.colors.accent}` : theme.shadows.default,
+        boxShadow: active
+          ? `${theme.shadows.default}, 0 0 0 2px ${theme.preview.accent}`
+          : theme.shadows.default,
         fontFamily: theme.typography.fontFamily,
         fontWeight: theme.typography.fontWeight,
       }}
@@ -34,8 +36,8 @@ function ThemeCard({
           <span
             className="rounded-full px-2 py-0.5 text-xs"
             style={{
-              background: theme.colors.accent,
-              color: theme.colors.background,
+              background: theme.preview.accent,
+              color: theme.preview.background,
             }}
           >
             Active
@@ -44,7 +46,7 @@ function ThemeCard({
       </div>
 
       <div className="flex gap-2">
-        {[theme.colors.accent, theme.colors.secondary, theme.colors.foreground].map(
+        {[theme.preview.accent, theme.preview.secondary, theme.preview.foreground].map(
           (color) => (
             <span
               key={color}
@@ -82,7 +84,7 @@ export const MainFrame = () => {
             WebStyle
           </h1>
           <p className="mt-1 text-sm text-[var(--text)]">
-            Apply a theme to every site in your browser.
+            Restyle typography, shapes, and shadows — keeps each site&apos;s colors.
           </p>
         </div>
 
